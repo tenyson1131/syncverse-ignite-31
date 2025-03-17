@@ -4,9 +4,18 @@ import { useEffect, useState } from 'react';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentWord, setCurrentWord] = useState(0);
+  
+  const words = ["Developers", "Innovators", "Creators", "Leaders"];
 
   useEffect(() => {
     setIsVisible(true);
+    
+    const wordInterval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 3000);
+    
+    return () => clearInterval(wordInterval);
   }, []);
 
   const scrollToNextSection = () => {
@@ -14,26 +23,57 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white overflow-hidden">
-      {/* Background elements */}
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden theme-transition">
+      {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-[30%] -right-[10%] w-[80%] h-[80%] bg-blue-100 rounded-full opacity-30 blur-3xl"></div>
-        <div className="absolute top-[60%] -left-[10%] w-[60%] h-[60%] bg-purple-100 rounded-full opacity-30 blur-3xl"></div>
+        <div className="blob top-[10%] left-[20%] w-[30%] h-[30%] bg-blue-300 dark:bg-blue-700 rounded-full"></div>
+        <div className="blob top-[40%] right-[15%] w-[35%] h-[40%] bg-violet-200 dark:bg-violet-800 rounded-full animation-delay-2000"></div>
+        <div className="blob bottom-[10%] left-[35%] w-[25%] h-[25%] bg-purple-200 dark:bg-purple-700 rounded-full animation-delay-4000"></div>
       </div>
+      
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
 
       <div className={`relative z-10 section-container text-center pt-24 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium animate-fade-in-down">
+        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-fade-in-down">
           Transform Your Future
         </div>
         
         <h1 className="mb-6 max-w-4xl mx-auto animate-fade-in-down animation-delay-200">
-          <span>Empowering Future </span>
-          <span className="text-gradient">Developers, Innovators,</span>
-          <span> and </span>
-          <span className="text-gradient">AI Experts</span>
+          <span className="block sm:inline">Empowering Future </span>
+          <div className="relative inline-block min-w-[200px] h-[1.25em] align-bottom">
+            <span className="text-gradient absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
+                  style={{
+                    opacity: currentWord === 0 ? 1 : 0,
+                    transform: currentWord === 0 ? 'translateY(0)' : 'translateY(20px)'
+                  }}>
+              {words[0]}
+            </span>
+            <span className="text-gradient-alt absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
+                  style={{
+                    opacity: currentWord === 1 ? 1 : 0,
+                    transform: currentWord === 1 ? 'translateY(0)' : 'translateY(20px)'
+                  }}>
+              {words[1]}
+            </span>
+            <span className="text-gradient absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
+                  style={{
+                    opacity: currentWord === 2 ? 1 : 0,
+                    transform: currentWord === 2 ? 'translateY(0)' : 'translateY(20px)'
+                  }}>
+              {words[2]}
+            </span>
+            <span className="text-gradient-alt absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
+                  style={{
+                    opacity: currentWord === 3 ? 1 : 0,
+                    transform: currentWord === 3 ? 'translateY(0)' : 'translateY(20px)'
+                  }}>
+              {words[3]}
+            </span>
+          </div>
         </h1>
         
-        <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 animate-fade-in-up animation-delay-400">
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 animate-fade-in-up animation-delay-400">
           Join our industry-leading internships and training programs in Web Development, 
           App Development, and AI/ML to kickstart your tech career.
         </p>
@@ -43,25 +83,27 @@ const Hero = () => {
             href="https://forms.microsoft.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            className="group bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/10 transform hover:-translate-y-0.5 relative overflow-hidden"
           >
-            Apply Now
+            <span className="relative z-10">Apply Now</span>
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-500 dark:to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
           </a>
           <a
             href="#programs"
-            className="bg-white hover:bg-gray-50 text-gray-800 font-medium px-8 py-3 rounded-full border border-gray-200 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="group bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium px-8 py-3 rounded-full border border-gray-200 dark:border-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 relative overflow-hidden"
           >
-            Explore Programs
+            <span className="relative z-10">Explore Programs</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 group-hover:w-full transition-all duration-300 z-0"></span>
           </a>
         </div>
 
         <div className="flex justify-center animate-fade-in animation-delay-1000">
           <button
             onClick={scrollToNextSection}
-            className="p-2 rounded-full bg-white border border-gray-100 shadow-md animate-float"
+            className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-md animate-float hover:shadow-lg dark:shadow-gray-900/10 dark:hover:shadow-gray-900/20 transition-all duration-300"
             aria-label="Scroll down"
           >
-            <ChevronDown className="text-gray-400" />
+            <ChevronDown className="text-gray-400 dark:text-gray-500" />
           </button>
         </div>
       </div>
