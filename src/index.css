@@ -101,6 +101,12 @@
   section {
     @apply py-16 md:py-24;
   }
+  
+  .fixed-position {
+    margin-top: 0 !important;
+    position: relative;
+    top: 0;
+  }
 }
 
 @layer utilities {

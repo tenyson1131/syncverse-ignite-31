@@ -1,10 +1,11 @@
+
 import { ChevronDown, Code, Terminal, Database, Cpu } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { toast } from 'sonner';
 import BackgroundPattern from './BackgroundPattern';
 
 const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Set to true initially to prevent transition shift
   const [currentWord, setCurrentWord] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
@@ -12,13 +13,8 @@ const Hero = () => {
   const words = ["Developers", "Innovators", "Creators", "Leaders"];
 
   useEffect(() => {
-    setIsVisible(true);
-    
-    const wordInterval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 3000);
-    
-    // Show welcome toast when component mounts
+    // Remove the initial visibility setting that was causing the shift
+    // Only show welcome toast when component mounts
     toast.success('Welcome to SyncVerse!', {
       description: 'Explore our internship programs and kickstart your tech career.',
       duration: 5000,
@@ -35,6 +31,10 @@ const Hero = () => {
       }
     };
 
+    const wordInterval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 3000);
+
     window.addEventListener('mousemove', handleMouseMove);
     
     return () => {
@@ -50,9 +50,9 @@ const Hero = () => {
   return (
     <div 
       ref={heroRef}
-      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition"
+      className="fixed-position relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition"
       style={{ 
-        paddingTop: '4rem' // Add padding to account for the navbar height instead of margin
+        paddingTop: '4rem', // Add padding to account for the navbar height
       }}
     >
       <div className="absolute inset-0 overflow-hidden">
@@ -68,8 +68,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDEwMCAwIEwgMCAwIDAgMTAwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTc0LCAyMzUsIDI1NSwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiAvPjwvc3ZnPg==')] opacity-[0.05] dark:opacity-[0.08]"></div>
       </div>
       
-      {/* Content */}
-      <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Content - removed transition-opacity that was causing the shift */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50/90 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-slide-in-left backdrop-blur-sm">
           Transform Your Future
         </div>
@@ -119,7 +119,7 @@ const Hero = () => {
           </a>
         </div>
 
-        <div className="flex justify-center animate-bounce-slow animation-delay-1000">
+        <div className="flex justify-center">
           <button
             onClick={scrollToNextSection}
             className="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-lg dark:shadow-gray-900/10 dark:hover:shadow-gray-900/20 transition-all duration-300 backdrop-blur-sm"

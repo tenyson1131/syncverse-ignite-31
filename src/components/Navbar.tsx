@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
+  // Initialize isScrolled based on current scroll position to prevent jumps on page load
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -18,6 +19,9 @@ const Navbar = () => {
         setIsScrolled(false);
       }
     };
+
+    // Check initial scroll position
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
