@@ -11,7 +11,6 @@ import Footer from '../components/Footer';
 import GridBackground from '../components/backgrounds/GridBackground';
 import DotsBackground from '../components/backgrounds/DotsBackground';
 import StarfieldBackground from '../components/backgrounds/StarfieldBackground';
-import GeometricBackground from '../components/backgrounds/GeometricBackground';
 
 const Index = () => {
   return (
@@ -24,23 +23,34 @@ const Index = () => {
           <About />
         </div>
         <div className="relative">
-          <StarfieldBackground starCount={150} animated={true} />
+          {/* Subtle starfield with very few stars */}
+          <StarfieldBackground starCount={50} animated={true} opacity={0.3} speed={0.2} />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/10 to-indigo-50/10 dark:from-blue-900/5 dark:to-indigo-900/5"></div>
           <Programs />
         </div>
         <div className="relative">
-          <GeometricBackground density="medium" />
+          {/* Subtle gradient blobs */}
+          <div className="absolute top-0 left-5 w-64 h-64 rounded-full bg-blue-200/10 dark:bg-blue-400/5 filter blur-3xl"></div>
+          <div className="absolute bottom-0 right-5 w-80 h-80 rounded-full bg-indigo-200/10 dark:bg-indigo-400/5 filter blur-3xl"></div>
           <WhyChooseUs />
         </div>
         <div className="relative">
-          <GridBackground gridSize={25} gridColor="rgba(99, 102, 241, 0.08)" />
+          {/* Very subtle grid with lower opacity */}
+          <GridBackground gridSize={40} gridColor="rgba(99, 102, 241, 0.03)" />
           <Process />
         </div>
         <div className="relative">
-          <DotsBackground dotSize={1.5} dotSpacing={30} dotColor="#4f46e5" />
+          {/* More subtle dots */}
+          <DotsBackground dotSize={1} dotSpacing={40} dotColor="#4f46e5" opacity={0.03} />
           <Testimonials />
         </div>
         <div className="relative">
-          <StarfieldBackground starCount={80} animated={true} />
+          {/* Subtle gradient background */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-1/4 w-80 h-80 rounded-full bg-blue-200/10 dark:bg-blue-400/5 filter blur-3xl"></div>
+            <div className="absolute bottom-20 right-1/4 w-64 h-64 rounded-full bg-indigo-200/10 dark:bg-indigo-400/5 filter blur-3xl"></div>
+          </div>
           <ContactUs />
         </div>
       </main>
