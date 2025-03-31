@@ -69,14 +69,14 @@ const Process = () => {
   ];
 
   return (
-    <section id="process" className="bg-gray-50" ref={sectionRef}>
+    <section id="process" className="bg-gray-50 dark:bg-gray-800 theme-transition" ref={sectionRef}>
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium">
+          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium">
             Our Process
           </div>
-          <h2 className="mb-6">How It Works</h2>
-          <p className="text-gray-600">
+          <h2 className="mb-6 text-gray-900 dark:text-white">How It Works</h2>
+          <p className="text-gray-600 dark:text-gray-300">
             Our streamlined process is designed to assess your fit, provide comprehensive training, 
             and set you up for success in the tech industry.
           </p>
@@ -87,7 +87,7 @@ const Process = () => {
           <div className="hidden md:block">
             <div className="relative">
               {/* Progress bar */}
-              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
+              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2"></div>
               <div 
                 className="absolute top-1/2 left-0 h-0.5 bg-blue-500 -translate-y-1/2 transition-all duration-500"
                 style={{ width: `${(activeStep + 1) * 25}%` }}
@@ -106,11 +106,11 @@ const Process = () => {
                     style={{ transitionDelay: `${index * 150}ms` }}
                   >
                     <div 
-                      className={`w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold ${
+                      className={`w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold transition-all duration-500 shadow-md ${
                         index <= activeStep 
                           ? 'bg-blue-500 text-white' 
-                          : 'bg-white text-gray-400 border border-gray-200'
-                      } transition-all duration-500 shadow-md`}
+                          : 'bg-white dark:bg-gray-700 text-gray-400 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
+                      }`}
                     >
                       {step.number}
                     </div>
@@ -131,8 +131,8 @@ const Process = () => {
                   }`}
                   style={{ transitionDelay: `${index * 150 + 300}ms` }}
                 >
-                  <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -151,17 +151,17 @@ const Process = () => {
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div 
-                  className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold mr-4 flex-shrink-0 ${
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold mr-4 flex-shrink-0 transition-all duration-500 shadow-md ${
                     index <= activeStep 
                       ? 'bg-blue-500 text-white' 
-                      : 'bg-white text-gray-400 border border-gray-200'
-                  } transition-all duration-500 shadow-md`}
+                      : 'bg-white dark:bg-gray-700 text-gray-400 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
+                  }`}
                 >
                   {step.number}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-1">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+                  <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
                 </div>
               </div>
             ))}
@@ -180,7 +180,7 @@ const Process = () => {
             href="https://forms.microsoft.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="inline-block bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
             Start Your Journey Today
           </a>

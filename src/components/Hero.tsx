@@ -1,6 +1,7 @@
 
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,6 +15,13 @@ const Hero = () => {
     const wordInterval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length);
     }, 3000);
+    
+    // Show welcome toast when component mounts
+    toast.success('Welcome to SyncVerse!', {
+      description: 'Explore our internship programs and kickstart your tech career.',
+      duration: 5000,
+      position: 'bottom-right',
+    });
     
     return () => clearInterval(wordInterval);
   }, []);
@@ -35,12 +43,12 @@ const Hero = () => {
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
 
       <div className={`relative z-10 section-container text-center pt-24 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-fade-in-down">
+        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-slide-in-left">
           Transform Your Future
         </div>
         
-        <h1 className="mb-6 max-w-4xl mx-auto animate-fade-in-down animation-delay-200">
-          <span className="block sm:inline">Empowering Future </span>
+        <h1 className="mb-6 max-w-4xl mx-auto animate-slide-in-left animation-delay-200 flex flex-col md:flex-row items-center justify-center gap-2">
+          <span className="block">Empowering Future </span>
           <div className="relative inline-block min-w-[200px] h-[1.25em] align-bottom">
             <span className="text-gradient absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
                   style={{
@@ -73,7 +81,7 @@ const Hero = () => {
           </div>
         </h1>
         
-        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 animate-fade-in-up animation-delay-400">
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 animate-slide-in-right animation-delay-400">
           Join our industry-leading internships and training programs in Web Development, 
           App Development, and AI/ML to kickstart your tech career.
         </p>
@@ -97,10 +105,10 @@ const Hero = () => {
           </a>
         </div>
 
-        <div className="flex justify-center animate-fade-in animation-delay-1000">
+        <div className="flex justify-center animate-bounce-slow animation-delay-1000">
           <button
             onClick={scrollToNextSection}
-            className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-md animate-float hover:shadow-lg dark:shadow-gray-900/10 dark:hover:shadow-gray-900/20 transition-all duration-300"
+            className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-lg dark:shadow-gray-900/10 dark:hover:shadow-gray-900/20 transition-all duration-300"
             aria-label="Scroll down"
           >
             <ChevronDown className="text-gray-400 dark:text-gray-500" />

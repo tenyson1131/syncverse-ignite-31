@@ -34,34 +34,34 @@ const WhyChooseUs = () => {
     {
       title: "Real-World Projects",
       description: "Work on actual client projects, building a portfolio of work that showcases your skills to potential employers.",
-      icon: <Briefcase className="h-12 w-12 text-blue-500" />,
+      icon: <Briefcase className="h-12 w-12 text-blue-500 dark:text-blue-400" />,
     },
     {
       title: "Expert Mentorship",
       description: "Receive guidance from industry professionals who bring years of experience and insights to your learning journey.",
-      icon: <UserCog className="h-12 w-12 text-violet-500" />,
+      icon: <UserCog className="h-12 w-12 text-violet-500 dark:text-violet-400" />,
     },
     {
       title: "Cutting-Edge Technologies",
       description: "Stay at the forefront of tech with training in the latest tools, frameworks, and methodologies used by top companies.",
-      icon: <Lightbulb className="h-12 w-12 text-indigo-500" />,
+      icon: <Lightbulb className="h-12 w-12 text-indigo-500 dark:text-indigo-400" />,
     },
     {
       title: "Networking Opportunities",
       description: "Connect with industry leaders, potential employers, and fellow tech enthusiasts through our extensive network.",
-      icon: <Network className="h-12 w-12 text-blue-500" />,
+      icon: <Network className="h-12 w-12 text-blue-500 dark:text-blue-400" />,
     },
   ];
 
   return (
-    <section id="why-us" className="bg-white" ref={sectionRef}>
+    <section id="why-us" className="bg-white dark:bg-gray-900 theme-transition" ref={sectionRef}>
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium">
+          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium">
             Why Choose SyncVerse
           </div>
-          <h2 className="mb-6">What Sets Us Apart</h2>
-          <p className="text-gray-600">
+          <h2 className="mb-6 text-gray-900 dark:text-white">What Sets Us Apart</h2>
+          <p className="text-gray-600 dark:text-gray-300">
             SyncVerse offers more than just technical training. We provide a comprehensive experience that 
             prepares you for a successful career in technology.
           </p>
@@ -79,11 +79,11 @@ const WhyChooseUs = () => {
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="mr-6 flex-shrink-0">
-                <div className="p-4 bg-blue-50 rounded-xl">{feature.icon}</div>
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">{feature.icon}</div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
               </div>
             </div>
           ))}
