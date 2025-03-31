@@ -53,51 +53,14 @@ const Hero = () => {
       ref={heroRef}
       className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition"
     >
-      {/* Tech-inspired background with grid and floating elements */}
-      <BackgroundPattern className="opacity-40 dark:opacity-20" />
-      
-      {/* Floating tech icons */}
-      <div className="absolute w-full h-full pointer-events-none">
-        <div 
-          className="absolute top-[15%] left-[10%] transform -translate-x-1/2 -translate-y-1/2 animate-float"
-          style={{ 
-            animationDelay: '0s',
-            transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px) translateX(-50%) translateY(-50%)`
-          }}
-        >
-          <Code className="w-12 h-12 text-blue-500/40 dark:text-blue-400/40" />
-        </div>
-        <div 
-          className="absolute bottom-[20%] right-[15%] transform -translate-x-1/2 -translate-y-1/2 animate-float" 
-          style={{ 
-            animationDelay: '1s',
-            transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px) translateX(-50%) translateY(-50%)`
-          }}
-        >
-          <Terminal className="w-14 h-14 text-purple-500/40 dark:text-purple-400/40" />
-        </div>
-        <div 
-          className="absolute top-[60%] right-[30%] transform -translate-x-1/2 -translate-y-1/2 animate-float" 
-          style={{ 
-            animationDelay: '2s',
-            transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px) translateX(-50%) translateY(-50%)`
-          }}
-        >
-          <Database className="w-10 h-10 text-green-500/40 dark:text-green-400/40" />
-        </div>
-        <div 
-          className="absolute bottom-[40%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 animate-float" 
-          style={{ 
-            animationDelay: '3s',
-            transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px) translateX(-50%) translateY(-50%)`
-          }}
-        >
-          <Cpu className="w-16 h-16 text-indigo-500/40 dark:text-indigo-400/40" />
-        </div>
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="blob top-[10%] left-[20%] w-[30%] h-[30%] bg-blue-300 dark:bg-blue-700 rounded-full"></div>
+        <div className="blob top-[40%] right-[15%] w-[35%] h-[40%] bg-violet-200 dark:bg-violet-800 rounded-full animation-delay-2000"></div>
+        <div className="blob bottom-[10%] left-[35%] w-[25%] h-[25%] bg-purple-200 dark:bg-purple-700 rounded-full animation-delay-4000"></div>
       </div>
-
-      {/* Subtle animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 to-violet-500/5 dark:from-blue-500/10 dark:to-violet-500/10 animate-pulse-slow"></div>
+      
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
 
       {/* Content */}
       <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
