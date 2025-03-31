@@ -29,7 +29,7 @@ const GridBackground: React.FC<GridBackgroundProps> = ({
       />
       
       {/* Animated grid highlights */}
-      {[...Array(3)].map((_, i) => (
+      {[...Array(5)].map((_, i) => (
         <div 
           key={i}
           className="absolute rounded-lg bg-indigo-500/5 dark:bg-indigo-400/5 animate-pulse-slow"

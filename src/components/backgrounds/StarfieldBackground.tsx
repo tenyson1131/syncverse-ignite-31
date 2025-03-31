@@ -7,6 +7,7 @@ interface StarfieldBackgroundProps {
   animated?: boolean;
   opacity?: number;
   speed?: number;
+  twinkle?: boolean;
 }
 
 const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({ 
@@ -14,11 +15,11 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
   starCount = 100,
   animated = true,
   opacity = 1,
-  speed = 0.05
+  speed = 0.05,
+  twinkle = true
 }) => {
-  const [stars, setStars] = useState<Array<{x: number, y: number, size: number, opacity: number, speed: number}>>([]);
+  const [stars, setStars] = useState<Array<{x: number, y: number, size: number, opacity: number, speed: number, twinkleSpeed: number}>>([]);
   const requestRef = useRef<number>();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   
   // Generate initial stars
   useEffect(() => {
@@ -30,7 +31,8 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
           y: Math.random() * 100,
           size: Math.random() * 3 + 1,
           opacity: Math.random() * 0.7 + 0.3,
-          speed: Math.random() * speed + (speed / 5)
+          speed: Math.random() * speed + (speed / 5),
+          twinkleSpeed: 1 + Math.random() * 4
         });
       }
       setStars(newStars);
@@ -47,13 +49,20 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
   
   // Animate stars if animation is enabled
   useEffect(() => {
-    if (!animated) return;
+    if (!animated && !twinkle) return;
     
-    const animate = () => {
+    let twinklePhase = 0;
+    
+    const animate = (time: number) => {
+      twinklePhase = time / 1000;
+      
       setStars(prevStars => 
-        prevStars.map(star => ({
+        prevStars.map((star, index) => ({
           ...star,
-          y: (star.y + star.speed) % 100
+          y: animated ? (star.y + star.speed) % 100 : star.y,
+          opacity: twinkle 
+            ? 0.3 + Math.sin(twinklePhase / star.twinkleSpeed + index) * 0.3
+            : star.opacity
         }))
       );
       
@@ -67,7 +76,7 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [animated]);
+  }, [animated, twinkle]);
   
   return (
     <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none ${className}`} style={{ opacity }}>
@@ -75,16 +84,32 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
       {stars.map((star, index) => (
         <div 
           key={index}
-          className={`absolute rounded-full bg-white dark:bg-blue-100 ${animated ? '' : 'animate-pulse-slow'}`}
+          className="absolute rounded-full bg-white dark:bg-blue-100"
           style={{
             left: `${star.x}%`,
             top: `${star.y}%`,
             width: `${star.size}px`,
             height: `${star.size}px`,
             opacity: star.opacity,
-            animationDelay: animated ? undefined : `${Math.random() * 3}s`,
-            animationDuration: animated ? undefined : `${3 + Math.random() * 4}s`,
-            transition: animated ? 'top 0.1s linear' : undefined
+            transition: animated ? 'top 0.1s linear' : undefined,
+            filter: `blur(${star.size > 2 ? 0.5 : 0}px)`
+          }}
+        />
+      ))}
+      
+      {/* Add a few larger "spotlight" stars */}
+      {[...Array(3)].map((_, i) => (
+        <div 
+          key={`spotlight-${i}`}
+          className="absolute rounded-full bg-indigo-100/30 dark:bg-blue-300/20 animate-pulse-slow"
+          style={{
+            width: `${Math.random() * 20 + 10}px`,
+            height: `${Math.random() * 20 + 10}px`,
+            left: `${Math.random() * 90}%`,
+            top: `${Math.random() * 90}%`,
+            filter: 'blur(5px)',
+            animationDuration: `${3 + Math.random() * 3}s`,
+            animationDelay: `${i * 1}s`
           }}
         />
       ))}
