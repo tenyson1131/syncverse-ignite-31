@@ -24,23 +24,23 @@ const Index = () => {
           <About />
         </div>
         <div className="relative">
-          <StarfieldBackground />
+          <StarfieldBackground starCount={150} animated={true} />
           <Programs />
         </div>
         <div className="relative">
-          <GeometricBackground />
+          <GeometricBackground density="medium" />
           <WhyChooseUs />
         </div>
         <div className="relative">
-          <GridBackground />
+          <GridBackground gridSize={25} gridColor="rgba(99, 102, 241, 0.08)" />
           <Process />
         </div>
         <div className="relative">
-          <DotsBackground />
+          <DotsBackground dotSize={1.5} dotSpacing={30} dotColor="#4f46e5" />
           <Testimonials />
         </div>
         <div className="relative">
-          <StarfieldBackground starCount={50} />
+          <StarfieldBackground starCount={80} animated={true} />
           <ContactUs />
         </div>
       </main>
