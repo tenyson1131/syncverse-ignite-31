@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -78,4 +79,49 @@
 .digital-noise {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAA6RJREFUaIHVmj9oFEEUxn97JEYRFSMYTaKCQbC0EEGwEAsbQYKgnZ2VhYUWFjZWNhYiWAgWWlgJgpWFf0AQTVBBBDFiIIpiNGDMnbG4OXJ7N7s7s7d7Gfgud7Mz733z5s2bmTfQRnQ67NsJDAHDwEZgEOgF1gKdpeYzwBTwFZgEPgLvgHFgtlVjbgXOAK+BWaDwj9+M0mchcAEYacWgB4CHwK8Qg48QcR8YCDnoc8A0tYpdTW4auFAW3FLcBuYbMLzV5H6UdbQMvyd+EzeZOWC0DGP1rVV4HvnpCbyIWwCO+3S8D/jRQqOLwhRwMNTgHwfobCR3OsTgJ3AbtpbcXR+D3w/Q0UvgKjAGvAG+Ib6/UCr9XV9q1wfsArYDW0p/h+rrF/DQddDpmFEWrJVbwAEP3Z3AuZLMRQ/ZBeBcCt3DiYYWRO62ruQvVxHZBUyl0F8Y8dTfCDzSmBgIGCyS7lNmPXDMQ8c+oEfhr73wn0naMGeFseFwH+hW6O1NyNxsga4FYIdC75k0ob3I7URhbgKNpXC11ZqLayzbFHo/AH+SL5NEqmQ0Gr1lNgOfE3JjwGdgUdE+yTPAuuQLeZldCkXffRQXgPsp/x9BWi+nheFuhaJxB0VVqoaRE1uSG2TKBXNpw4bANuStKEkTbedZhXxCn40pKiHJpISUIWCfpb039vin+iLJNh+Ak8rzLAadGvk+wbjrGuykO02gKOdjE3BFeR4k18aCc5oxJAdr46xCvhexYTbax8jMVfWxZRrQPFWicdyGywp5F9yzkTMXDX4kHq2KvuiKK9PYqJBPWyFbxtA0WqAiluhLckvx/aDH4J3lGI3bxt1oJGJaqe3okP+fSY3ntm1KGX7auF3VQnpDM5amYFMxaFnrNL5vNfwrViPaCr6xs2jeW6G/wVI0tpVaRdON2x5vLfJGG/cpU6TLKvqkieKm5VmhcR+g4nbf1m5YZSWs8QQb9CG/9EpCBzCCZC+HpfPWAtIHXANeGWMuWhqdhm2WbV4n/t9GSPjCPAT62SbX4aB/w3PmnULvNqRMmDUPNQdeaORcX5jDwJ7S7w1Uy5GhcFyh9xXw1LXzEJ6ouplQVTbo4koAVhKpwkb1vO8IpDzUiAEkr24qcxaRnKopaOyYdf68DiciCw2ZnPo0y0e28kAnkptr8+ArQ0aHar1Cn0VSqZlGBe2CVqxLbqsFvkueXBZ4K9yVFUpGPtyKQoUKFSpUyBD/AWWfR9v73dOlAAAAAElFTkSuQmCC');
   opacity: 0.03;
+}
+
+/* Testimonial transitions */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }

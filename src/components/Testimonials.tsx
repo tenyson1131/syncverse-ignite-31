@@ -90,7 +90,7 @@ const Testimonials = () => {
     if (!transitioning) {
       setTransitioning(true);
       setActiveIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
-      setTimeout(() => setTransitioning(false), 500);
+      setTimeout(() => setTransitioning(false), 300);
     }
   };
 
@@ -98,7 +98,7 @@ const Testimonials = () => {
     if (!transitioning) {
       setTransitioning(true);
       setActiveIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));
-      setTimeout(() => setTransitioning(false), 500);
+      setTimeout(() => setTransitioning(false), 300);
     }
   };
 
@@ -122,65 +122,69 @@ const Testimonials = () => {
           }`}
         >
           <div className="max-w-4xl mx-auto">
-            {/* Minimal card design with smaller avatars instead of large images */}
-            <Card className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 border-0 shadow-lg overflow-hidden">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={testimonial.name}
-                  className={`transition-all duration-500 ease-in-out ${
-                    activeIndex === index 
-                      ? 'opacity-100 scale-100 z-10' 
-                      : 'opacity-0 scale-95 absolute inset-0 z-0 pointer-events-none'
-                  }`}
-                >
-                  <CardContent className="p-8">
-                    {/* Quote and rating */}
-                    <div className="mb-8">
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
-                          <span className="text-blue-600 dark:text-blue-300 text-xl font-bold">"</span>
+            {/* Fixed height container to prevent layout shifts */}
+            <div className="relative h-[340px] md:h-[320px]">
+              <Card className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 border-0 shadow-lg overflow-hidden absolute inset-0">
+                {testimonials.map((testimonial, index) => (
+                  <div 
+                    key={testimonial.name}
+                    className={`transition-all absolute inset-0 ${
+                      activeIndex === index 
+                        ? 'opacity-100 translate-x-0' 
+                        : index < activeIndex || (activeIndex === 0 && index === testimonials.length - 1)
+                          ? 'opacity-0 -translate-x-full' 
+                          : 'opacity-0 translate-x-full'
+                    } duration-300 ease-in-out`}
+                  >
+                    <CardContent className="p-8 h-full flex flex-col">
+                      {/* Quote and rating */}
+                      <div className="mb-8 flex-1">
+                        <div className="flex justify-between items-center mb-4">
+                          <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
+                            <span className="text-blue-600 dark:text-blue-300 text-xl font-bold">"</span>
+                          </div>
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star 
+                                key={i} 
+                                size={16} 
+                                className={`${
+                                  i < testimonial.rating 
+                                    ? 'text-yellow-400 fill-yellow-400' 
+                                    : 'text-gray-300 dark:text-gray-600'
+                                } ml-1`} 
+                              />
+                            ))}
+                          </div>
                         </div>
-                        <div className="flex">
-                          {[...Array(5)].map((_, i) => (
-                            <Star 
-                              key={i} 
-                              size={16} 
-                              className={`${
-                                i < testimonial.rating 
-                                  ? 'text-yellow-400 fill-yellow-400' 
-                                  : 'text-gray-300 dark:text-gray-600'
-                              } ml-1`} 
-                            />
-                          ))}
-                        </div>
+                        <blockquote className="text-lg md:text-xl font-light text-gray-700 dark:text-gray-200 leading-relaxed">
+                          "{testimonial.quote}"
+                        </blockquote>
                       </div>
-                      <blockquote className="text-lg md:text-xl font-light text-gray-700 dark:text-gray-200 leading-relaxed">
-                        "{testimonial.quote}"
-                      </blockquote>
-                    </div>
-                    
-                    {/* User info row */}
-                    <div className="flex items-center justify-between border-t pt-6 dark:border-gray-700">
-                      <div className="flex items-center space-x-3">
-                        <Avatar className="h-8 w-8 border-2 border-white dark:border-gray-800">
-                          <AvatarImage src={testimonial.image} alt={testimonial.name} className="object-cover" />
-                          <AvatarFallback className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs">
-                            {testimonial.initials}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <h4 className="font-medium text-gray-900 dark:text-white">{testimonial.name}</h4>
-                          <p className="text-sm text-blue-600 dark:text-blue-400">{testimonial.role}</p>
+                      
+                      {/* User info row */}
+                      <div className="flex items-center justify-between border-t pt-6 dark:border-gray-700">
+                        <div className="flex items-center space-x-3">
+                          <Avatar className="h-8 w-8 border-2 border-white dark:border-gray-800">
+                            <AvatarImage src={testimonial.image} alt={testimonial.name} className="object-cover" />
+                            <AvatarFallback className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs">
+                              {testimonial.initials}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <h4 className="font-medium text-gray-900 dark:text-white">{testimonial.name}</h4>
+                            <p className="text-sm text-blue-600 dark:text-blue-400">{testimonial.role}</p>
+                          </div>
                         </div>
+                        <span className="text-xs px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800">
+                          {testimonial.program}
+                        </span>
                       </div>
-                      <span className="text-xs px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800">
-                        {testimonial.program}
-                      </span>
-                    </div>
-                  </CardContent>
-                </div>
-              ))}
-            </Card>
+                    </CardContent>
+                  </div>
+                ))}
+              </Card>
+            </div>
           </div>
 
           {/* Navigation controls */}
@@ -193,7 +197,7 @@ const Testimonials = () => {
                     if (!transitioning) {
                       setTransitioning(true);
                       setActiveIndex(index);
-                      setTimeout(() => setTransitioning(false), 500);
+                      setTimeout(() => setTransitioning(false), 300);
                     }
                   }}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
