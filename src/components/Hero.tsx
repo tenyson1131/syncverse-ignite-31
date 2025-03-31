@@ -1,4 +1,3 @@
-
 import { ChevronDown, Code, Terminal, Database, Cpu } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { toast } from 'sonner';
@@ -51,10 +50,9 @@ const Hero = () => {
   return (
     <div 
       ref={heroRef}
-      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition mt-0"
+      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition"
       style={{ 
-        marginTop: 0,
-        paddingTop: '4rem' // Add padding to account for the navbar height
+        paddingTop: '4rem' // Add padding to account for the navbar height instead of margin
       }}
     >
       <div className="absolute inset-0 overflow-hidden">
