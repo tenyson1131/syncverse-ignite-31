@@ -33,8 +33,14 @@ const Process = () => {
   useEffect(() => {
     if (isVisible) {
       const interval = setInterval(() => {
-        setActiveStep((prev) => (prev + 1) % 5);
-      }, 3000);
+        setActiveStep((prev) => {
+          // Reset to 0 when reaching the last step
+          if (prev === 4) {
+            return 0;
+          }
+          return prev + 1;
+        });
+      }, 2000); // Increased speed from 3000 to 2000
       
       return () => clearInterval(interval);
     }
@@ -90,7 +96,17 @@ const Process = () => {
               <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2"></div>
               <div 
                 className="absolute top-1/2 left-0 h-0.5 bg-blue-500 -translate-y-1/2 transition-all duration-500"
-                style={{ width: `${(activeStep + 1) * 25}%` }}
+                style={{ 
+                  width: activeStep === 4 
+                    ? '100%' 
+                    : activeStep === 3 
+                      ? '80%' 
+                      : activeStep === 2 
+                        ? '60%' 
+                        : activeStep === 1 
+                          ? '40%' 
+                          : '20%' 
+                }}
               ></div>
               
               {/* Step circles */}

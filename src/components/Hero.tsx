@@ -51,7 +51,8 @@ const Hero = () => {
   return (
     <div 
       ref={heroRef}
-      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition"
+      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition mt-0"
+      style={{ marginTop: 0 }} // This ensures no margin at the top
     >
       <div className="absolute inset-0 overflow-hidden">
         <div className="blob top-[10%] left-[20%] w-[30%] h-[30%] bg-blue-300 dark:bg-blue-700 rounded-full"></div>
