@@ -54,8 +54,8 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section id="why-us" className="bg-white dark:bg-gray-900 theme-transition" ref={sectionRef}>
-      <div className="section-container">
+    <section id="why-us" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm theme-transition" ref={sectionRef}>
+      <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium">
             Why Choose SyncVerse
@@ -79,7 +79,7 @@ const WhyChooseUs = () => {
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="mr-6 flex-shrink-0">
-                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">{feature.icon}</div>
+                <div className="p-4 bg-blue-50/80 dark:bg-blue-900/30 rounded-xl shadow-sm">{feature.icon}</div>
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">{feature.title}</h3>
