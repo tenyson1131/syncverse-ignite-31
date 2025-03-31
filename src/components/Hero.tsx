@@ -1,11 +1,14 @@
 
-import { ChevronDown } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { ChevronDown, Code, Terminal, Database, Cpu } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
 import { toast } from 'sonner';
+import BackgroundPattern from './BackgroundPattern';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentWord, setCurrentWord] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLDivElement>(null);
   
   const words = ["Developers", "Innovators", "Creators", "Leaders"];
 
@@ -22,8 +25,23 @@ const Hero = () => {
       duration: 5000,
       position: 'bottom-right',
     });
+
+    // Mouse move parallax effect
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const { left, top, width, height } = heroRef.current.getBoundingClientRect();
+        const x = (e.clientX - left) / width - 0.5;
+        const y = (e.clientY - top) / height - 0.5;
+        setMousePosition({ x, y });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
     
-    return () => clearInterval(wordInterval);
+    return () => {
+      clearInterval(wordInterval);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const scrollToNextSection = () => {
@@ -31,53 +49,80 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden theme-transition">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="blob top-[10%] left-[20%] w-[30%] h-[30%] bg-blue-300 dark:bg-blue-700 rounded-full"></div>
-        <div className="blob top-[40%] right-[15%] w-[35%] h-[40%] bg-violet-200 dark:bg-violet-800 rounded-full animation-delay-2000"></div>
-        <div className="blob bottom-[10%] left-[35%] w-[25%] h-[25%] bg-purple-200 dark:bg-purple-700 rounded-full animation-delay-4000"></div>
-      </div>
+    <div 
+      ref={heroRef}
+      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition"
+    >
+      {/* Tech-inspired background with grid and floating elements */}
+      <BackgroundPattern className="opacity-40 dark:opacity-20" />
       
-      {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
+      {/* Floating tech icons */}
+      <div className="absolute w-full h-full pointer-events-none">
+        <div 
+          className="absolute top-[15%] left-[10%] transform -translate-x-1/2 -translate-y-1/2 animate-float"
+          style={{ 
+            animationDelay: '0s',
+            transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px) translateX(-50%) translateY(-50%)`
+          }}
+        >
+          <Code className="w-12 h-12 text-blue-500/40 dark:text-blue-400/40" />
+        </div>
+        <div 
+          className="absolute bottom-[20%] right-[15%] transform -translate-x-1/2 -translate-y-1/2 animate-float" 
+          style={{ 
+            animationDelay: '1s',
+            transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px) translateX(-50%) translateY(-50%)`
+          }}
+        >
+          <Terminal className="w-14 h-14 text-purple-500/40 dark:text-purple-400/40" />
+        </div>
+        <div 
+          className="absolute top-[60%] right-[30%] transform -translate-x-1/2 -translate-y-1/2 animate-float" 
+          style={{ 
+            animationDelay: '2s',
+            transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px) translateX(-50%) translateY(-50%)`
+          }}
+        >
+          <Database className="w-10 h-10 text-green-500/40 dark:text-green-400/40" />
+        </div>
+        <div 
+          className="absolute bottom-[40%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 animate-float" 
+          style={{ 
+            animationDelay: '3s',
+            transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px) translateX(-50%) translateY(-50%)`
+          }}
+        >
+          <Cpu className="w-16 h-16 text-indigo-500/40 dark:text-indigo-400/40" />
+        </div>
+      </div>
 
-      <div className={`relative z-10 section-container text-center pt-24 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Subtle animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 to-violet-500/5 dark:from-blue-500/10 dark:to-violet-500/10 animate-pulse-slow"></div>
+
+      {/* Content */}
+      <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-slide-in-left">
           Transform Your Future
         </div>
         
-        <h1 className="mb-6 max-w-4xl mx-auto animate-slide-in-left animation-delay-200 flex flex-col md:flex-row items-center justify-center gap-2">
-          <span className="block">Empowering Future </span>
-          <div className="relative inline-block min-w-[200px] h-[1.25em] align-bottom">
-            <span className="text-gradient absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
-                  style={{
-                    opacity: currentWord === 0 ? 1 : 0,
-                    transform: currentWord === 0 ? 'translateY(0)' : 'translateY(20px)'
-                  }}>
-              {words[0]}
-            </span>
-            <span className="text-gradient-alt absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
-                  style={{
-                    opacity: currentWord === 1 ? 1 : 0,
-                    transform: currentWord === 1 ? 'translateY(0)' : 'translateY(20px)'
-                  }}>
-              {words[1]}
-            </span>
-            <span className="text-gradient absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
-                  style={{
-                    opacity: currentWord === 2 ? 1 : 0,
-                    transform: currentWord === 2 ? 'translateY(0)' : 'translateY(20px)'
-                  }}>
-              {words[2]}
-            </span>
-            <span className="text-gradient-alt absolute inset-0 flex items-center justify-center transform transition-all duration-500 ease-in-out"
-                  style={{
-                    opacity: currentWord === 3 ? 1 : 0,
-                    transform: currentWord === 3 ? 'translateY(0)' : 'translateY(20px)'
-                  }}>
-              {words[3]}
-            </span>
+        <h1 className="mb-6 max-w-4xl mx-auto text-gray-900 dark:text-white">
+          <span className="block animate-fade-in-left animation-delay-200">Empowering Future</span>
+          <div className="h-20 sm:h-24 relative mt-2">
+            {words.map((word, index) => (
+              <span
+                key={word}
+                className={`absolute inset-0 flex items-center justify-center w-full transition-all duration-500 ease-in-out ${
+                  index % 2 === 0 ? 'text-gradient' : 'text-gradient-alt'
+                }`}
+                style={{
+                  opacity: currentWord === index ? 1 : 0,
+                  transform: currentWord === index ? 'translateY(0)' : 'translateY(20px)',
+                  filter: currentWord === index ? 'blur(0px)' : 'blur(4px)'
+                }}
+              >
+                {word}
+              </span>
+            ))}
           </div>
         </h1>
         
