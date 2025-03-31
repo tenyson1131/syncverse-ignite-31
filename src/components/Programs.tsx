@@ -65,8 +65,19 @@ const Programs = () => {
   };
 
   return (
-    <section id="programs" className="relative bg-gray-50 dark:bg-gray-800 theme-transition py-20" ref={sectionRef}>
-      <BackgroundPattern className="opacity-50" />
+    <section id="programs" className="relative bg-gray-50 dark:bg-gray-800 theme-transition py-20 overflow-hidden" ref={sectionRef}>
+      {/* Enhanced background effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Subtle gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-transparent to-purple-50/10 dark:from-blue-900/10 dark:via-transparent dark:to-purple-900/5"></div>
+        
+        {/* Gradient lights */}
+        <div className={`absolute top-[15%] left-[10%] w-[400px] h-[400px] bg-blue-100/30 dark:bg-blue-900/10 rounded-full blur-3xl transition-opacity duration-1000 ${isVisible ? 'opacity-60' : 'opacity-0'}`}></div>
+        <div className={`absolute bottom-[10%] right-[5%] w-[300px] h-[300px] bg-purple-100/20 dark:bg-purple-900/10 rounded-full blur-3xl transition-opacity duration-1000 delay-300 ${isVisible ? 'opacity-50' : 'opacity-0'}`}></div>
+        
+        {/* Enhanced pattern overlay with lower opacity */}
+        <BackgroundPattern className="opacity-30" />
+      </div>
       
       <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">

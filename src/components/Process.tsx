@@ -75,8 +75,25 @@ const Process = () => {
   ];
 
   return (
-    <section id="process" className="bg-gray-50 dark:bg-gray-800 theme-transition" ref={sectionRef}>
-      <div className="section-container">
+    <section id="process" className="bg-gray-50 dark:bg-gray-800 theme-transition relative overflow-hidden" ref={sectionRef}>
+      {/* Spotlight effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className={`absolute -left-10 top-[20%] w-[300px] h-[300px] rounded-full bg-blue-300/20 dark:bg-blue-500/10 blur-3xl transition-all duration-700 ${isVisible ? 'opacity-70' : 'opacity-0'}`}></div>
+        <div className={`absolute right-[5%] bottom-[15%] w-[250px] h-[250px] rounded-full bg-purple-300/20 dark:bg-purple-500/10 blur-3xl transition-all duration-700 delay-300 ${isVisible ? 'opacity-70' : 'opacity-0'}`}></div>
+        <div className={`absolute left-[40%] top-[60%] w-[200px] h-[200px] rounded-full bg-indigo-300/10 dark:bg-indigo-500/5 blur-3xl transition-all duration-700 delay-500 ${isVisible ? 'opacity-70' : 'opacity-0'}`}></div>
+        
+        {/* Spotlight highlight on active step */}
+        <div 
+          className="absolute w-[120px] h-[120px] rounded-full bg-blue-400/10 dark:bg-blue-400/5 blur-3xl transition-all duration-500"
+          style={{
+            left: `${activeStep * 20 + 10}%`,
+            top: '35%',
+            opacity: isVisible ? 0.8 : 0
+          }}
+        ></div>
+      </div>
+
+      <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium">
             Our Process
@@ -126,6 +143,8 @@ const Process = () => {
                         index <= activeStep 
                           ? 'bg-blue-500 text-white' 
                           : 'bg-white dark:bg-gray-700 text-gray-400 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
+                      } ${
+                        index === activeStep ? 'ring-4 ring-blue-200/50 dark:ring-blue-500/20' : ''
                       }`}
                     >
                       {step.number}
@@ -171,6 +190,8 @@ const Process = () => {
                     index <= activeStep 
                       ? 'bg-blue-500 text-white' 
                       : 'bg-white dark:bg-gray-700 text-gray-400 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
+                  } ${
+                    index === activeStep ? 'ring-4 ring-blue-200/50 dark:ring-blue-500/20' : ''
                   }`}
                 >
                   {step.number}

@@ -54,7 +54,21 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section id="why-us" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm theme-transition" ref={sectionRef}>
+    <section id="why-us" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm theme-transition relative overflow-hidden" ref={sectionRef}>
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/40 to-transparent dark:from-blue-900/10 dark:to-transparent"></div>
+        
+        {/* Subtle center glow */}
+        <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-100/20 via-indigo-100/10 to-purple-100/20 dark:from-blue-900/10 dark:via-indigo-900/5 dark:to-purple-900/10 rounded-full blur-3xl transition-opacity duration-1000 ${isVisible ? 'opacity-60' : 'opacity-0'}`}></div>
+        
+        {/* Light dots pattern overlay */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="dots-pattern w-full h-full"></div>
+        </div>
+      </div>
+      
       <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium">
@@ -94,10 +108,14 @@ const WhyChooseUs = () => {
             isVisible 
               ? 'opacity-100 scale-100' 
               : 'opacity-0 scale-95'
-          }`}
+          } relative overflow-hidden`}
           style={{ transitionDelay: '600ms' }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Inner glow effect */}
+          <div className="absolute left-1/4 top-0 w-[300px] h-[300px] bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute right-1/4 bottom-0 w-[200px] h-[200px] bg-white/5 rounded-full blur-3xl"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
             <div className="col-span-2">
               <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Future?</h3>
               <p className="opacity-90 mb-6">

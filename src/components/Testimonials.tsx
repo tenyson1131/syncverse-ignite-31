@@ -103,8 +103,11 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="bg-white dark:bg-gray-900 theme-transition" ref={sectionRef}>
-      <div className="section-container py-20">
+    <section id="testimonials" className="bg-white dark:bg-gray-900 theme-transition relative overflow-hidden" ref={sectionRef}>
+      {/* Centered radial glow */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-300/20 to-purple-300/20 dark:from-blue-600/10 dark:to-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div className="section-container py-20 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium">
             Testimonials
