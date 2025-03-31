@@ -5,12 +5,16 @@ interface StarfieldBackgroundProps {
   className?: string;
   starCount?: number;
   animated?: boolean;
+  opacity?: number;
+  speed?: number;
 }
 
 const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({ 
   className = '',
   starCount = 100,
-  animated = true
+  animated = true,
+  opacity = 1,
+  speed = 0.05
 }) => {
   const [stars, setStars] = useState<Array<{x: number, y: number, size: number, opacity: number, speed: number}>>([]);
   const requestRef = useRef<number>();
@@ -26,7 +30,7 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
           y: Math.random() * 100,
           size: Math.random() * 3 + 1,
           opacity: Math.random() * 0.7 + 0.3,
-          speed: Math.random() * 0.05 + 0.01
+          speed: Math.random() * speed + (speed / 5)
         });
       }
       setStars(newStars);
@@ -39,7 +43,7 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [starCount]);
+  }, [starCount, speed]);
   
   // Animate stars if animation is enabled
   useEffect(() => {
@@ -66,7 +70,7 @@ const StarfieldBackground: React.FC<StarfieldBackgroundProps> = ({
   }, [animated]);
   
   return (
-    <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none ${className}`}>
+    <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none ${className}`} style={{ opacity }}>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-50/10 dark:to-blue-900/5"></div>
       {stars.map((star, index) => (
         <div 

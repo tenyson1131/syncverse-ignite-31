@@ -5,16 +5,18 @@ interface GridBackgroundProps {
   className?: string;
   gridSize?: number;
   gridColor?: string;
+  opacity?: number;
 }
 
 const GridBackground: React.FC<GridBackgroundProps> = ({ 
   className = '', 
   gridSize = 20,
-  gridColor = 'rgba(99, 102, 241, 0.05)'
+  gridColor = 'rgba(99, 102, 241, 0.05)',
+  opacity = 1
 }) => {
   return (
-    <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none ${className}`}>
-      <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-blue-50/20 dark:to-blue-900/10"></div>
+    <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none ${className}`} style={{ opacity }}>
+      <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-blue-50/10 dark:to-blue-900/5"></div>
       <div 
         className="absolute w-full h-full"
         style={{
@@ -38,7 +40,8 @@ const GridBackground: React.FC<GridBackgroundProps> = ({
             top: `${Math.random() * 80}%`,
             animationDuration: `${5 + Math.random() * 5}s`,
             animationDelay: `${i * 1.5}s`,
-            transform: `rotate(${Math.random() * 45}deg)`
+            transform: `rotate(${Math.random() * 45}deg)`,
+            filter: 'blur(30px)'
           }}
         />
       ))}
