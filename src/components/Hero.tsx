@@ -52,20 +52,27 @@ const Hero = () => {
     <div 
       ref={heroRef}
       className="relative min-h-screen w-full overflow-hidden flex items-center justify-center theme-transition mt-0"
-      style={{ marginTop: 0 }} // This ensures no margin at the top
+      style={{ 
+        marginTop: 0,
+        paddingTop: '4rem' // Add padding to account for the navbar height
+      }}
     >
       <div className="absolute inset-0 overflow-hidden">
-        <div className="blob top-[10%] left-[20%] w-[30%] h-[30%] bg-blue-300 dark:bg-blue-700 rounded-full"></div>
-        <div className="blob top-[40%] right-[15%] w-[35%] h-[40%] bg-violet-200 dark:bg-violet-800 rounded-full animation-delay-2000"></div>
-        <div className="blob bottom-[10%] left-[35%] w-[25%] h-[25%] bg-purple-200 dark:bg-purple-700 rounded-full animation-delay-4000"></div>
+        {/* Enhanced tech-style blob effects with more defined edges */}
+        <div className="blob top-[10%] left-[20%] w-[30%] h-[30%] bg-blue-300/80 dark:bg-blue-700/60 rounded-[40%] filter blur-2xl"></div>
+        <div className="blob top-[40%] right-[15%] w-[35%] h-[40%] bg-violet-200/80 dark:bg-violet-800/60 rounded-[60%] animation-delay-2000 filter blur-2xl"></div>
+        <div className="blob bottom-[10%] left-[35%] w-[25%] h-[25%] bg-purple-200/80 dark:bg-purple-700/60 rounded-[50%] animation-delay-4000 filter blur-2xl"></div>
+        
+        {/* Tech-style grid overlay - more prominent */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] dark:opacity-[0.06]"></div>
+        
+        {/* Digital circuit pattern */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDEwMCAwIEwgMCAwIDAgMTAwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTc0LCAyMzUsIDI1NSwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiAvPjwvc3ZnPg==')] opacity-[0.05] dark:opacity-[0.08]"></div>
       </div>
       
-      {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
-
       {/* Content */}
       <div className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-slide-in-left">
+        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50/90 dark:bg-blue-900/50 border border-blue-100 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-medium animate-slide-in-left backdrop-blur-sm">
           Transform Your Future
         </div>
         
@@ -90,7 +97,7 @@ const Hero = () => {
           </div>
         </h1>
         
-        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 animate-slide-in-right animation-delay-400">
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 animate-slide-in-right animation-delay-400 bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm py-2 px-4 rounded-lg">
           Join our industry-leading internships and training programs in Web Development, 
           App Development, and AI/ML to kickstart your tech career.
         </p>
@@ -100,14 +107,14 @@ const Hero = () => {
             href="https://forms.microsoft.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/10 transform hover:-translate-y-0.5 relative overflow-hidden"
+            className="group bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/10 transform hover:-translate-y-0.5 relative overflow-hidden backdrop-blur-md"
           >
             <span className="relative z-10">Apply Now</span>
             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-500 dark:to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
           </a>
           <a
             href="#programs"
-            className="group bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium px-8 py-3 rounded-full border border-gray-200 dark:border-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 relative overflow-hidden"
+            className="group bg-white/80 dark:bg-gray-800/80 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium px-8 py-3 rounded-full border border-gray-200 dark:border-gray-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 relative overflow-hidden backdrop-blur-md"
           >
             <span className="relative z-10">Explore Programs</span>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 group-hover:w-full transition-all duration-300 z-0"></span>
@@ -117,7 +124,7 @@ const Hero = () => {
         <div className="flex justify-center animate-bounce-slow animation-delay-1000">
           <button
             onClick={scrollToNextSection}
-            className="p-3 rounded-full bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-lg dark:shadow-gray-900/10 dark:hover:shadow-gray-900/20 transition-all duration-300"
+            className="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-lg dark:shadow-gray-900/10 dark:hover:shadow-gray-900/20 transition-all duration-300 backdrop-blur-sm"
             aria-label="Scroll down"
           >
             <ChevronDown className="text-gray-400 dark:text-gray-500" />

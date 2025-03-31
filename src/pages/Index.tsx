@@ -15,12 +15,30 @@ const Index = () => {
       <Navbar />
       <main className="flex-grow">
         <Hero />
-        <About />
-        <Programs />
-        <WhyChooseUs />
-        <Process />
-        <Testimonials />
-        <ContactUs />
+        <div className="relative tech-bg">
+          <div className="absolute inset-0 circuit-pattern"></div>
+          <About />
+        </div>
+        <div className="relative tech-grid">
+          <div className="absolute inset-0 digital-noise"></div>
+          <Programs />
+        </div>
+        <div className="relative tech-bg">
+          <div className="absolute inset-0 circuit-pattern"></div>
+          <WhyChooseUs />
+        </div>
+        <div className="relative tech-grid">
+          <div className="absolute inset-0 digital-noise"></div>
+          <Process />
+        </div>
+        <div className="relative tech-bg">
+          <div className="absolute inset-0 circuit-pattern"></div>
+          <Testimonials />
+        </div>
+        <div className="relative tech-grid">
+          <div className="absolute inset-0 digital-noise"></div>
+          <ContactUs />
+        </div>
       </main>
       <Footer />
     </div>
